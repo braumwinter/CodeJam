@@ -1,0 +1,261 @@
+$background: #FFFFFF;
+$text_color: #000000;
+$keyboard-background: hsl(359, 30%, 80%);
+
+$button-background : hsl(359, 100%, 75%);
+$button_control-background : hsl(359, 100%, 65%);
+
+$button-inner_shadow: hsl(30, 20%, 98%);
+$button-drop_shadow : hsl(354, 73%, 55%);
+$button_control-drop_shadow : hsl(354, 73%, 45%);
+
+$button-text: $button-inner_shadow;
+$button_text-hover: $button-drop_shadow;
+$button_control-text-hover: $button_control-drop_shadow;
+
+$textarea-border: $button_control-background;
+$textarea-focus: $button-background;
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    font-size: 10px;
+    font-family: "PT Mono", monospace;
+    color: $text_color;
+
+    background-color: $background;
+}
+
+.container {
+    display: block;
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.textarea {
+    width: 100%;
+    margin: 15px auto;
+    padding: 10px;
+    border-radius: 1rem;
+    border: 1px solid $textarea-border;
+    font-size: 1.5rem;
+    font-family: inherit;
+
+}
+
+.textarea:focus {
+    outline: 0;
+    box-shadow: 0px 0px 4px 2px $textarea-focus;
+}
+
+.keyboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.keyboardRow {
+    background-color: $keyboard-background;
+    padding: 0 2rem;
+}
+
+.keyboardRow:first-child {
+    border-radius: 1rem 1rem 0 0;
+    padding-top: 1rem;
+}
+
+.keyboardRow:last-child {
+    border-radius: 0 0 1rem 1rem;
+    padding-bottom: 1rem;
+}
+
+/*
+.button {
+    position: relative;
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    margin: 0.5rem;
+    line-height: 2em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    color: $text_color;
+    outline: none;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px $button_box_shadow1 inset, 0 1px 1px $button_box_shadow2;
+}
+
+.button:hover {
+    background: $bg_button_hover_light2 linear-gradient($bg_button_hover_light1, $bg_button_hover_light2);
+    box-shadow: 0 0 0 1px $button_box_shadow_hover inset, 0 1px 1px $button_box_shadow_hover;
+}
+
+.button:active {
+    background: none;
+    box-shadow: 0 0 0 1px $button_box_shadow_active1 inset, 0 1px 3px $button_box_shadow_active2 inset, 0 1px 2px $button_box_shadow_active3;
+}
+
+.buttonControl {
+    color: rgb(209,209,217);
+    background: linear-gradient(rgb(110,112,120), rgb(81,81,86)) rgb(110,112,120);
+    
+}
+
+.buttonControl:hover {
+    background:  linear-gradient(rgb(126,126,134), rgb(70,71,76)) rgb(126,126,134);
+    box-shadow: 0 0 0 1px $button_box_shadow_hover inset, 0 1px 1px $button_box_shadow_hover;
+}
+
+.buttonControl:active {
+    background: linear-gradient(rgb(76,77,82), rgb(56,57,62)) rgb(76,77,82);
+  box-shadow:
+   0 0 1px rgba(0,0,0,.5) inset,
+   0 2px 3px rgba(0,0,0,.5) inset,
+   0 1px 1px rgba(255,255,255,.1);
+}*/
+
+/*
+$button-background : hsl(359,100%,75%);
+$button_control-background : hsl(359,100%,65%);
+
+$button-inner_shadow: hsl(30,20%,98%);
+$button-drop_shadow : hsl(354,73%,55%);
+$button_control-drop_shadow : hsl(354,73%,45%);
+
+$button-text: $inner_shadow;
+$button_text-hover: $button-drop_shadow;
+$button_control-text-hover: $button_control-drop_shadow;
+*/
+
+.button {
+    position: relative;
+    display: inline-block;
+    width: 5rem;
+    height: 5rem;
+    margin: 0.3rem;
+    line-height: 2rem;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    //color: $text_color;
+    outline: none;
+    border-radius: 1rem;
+    box-shadow: 0 1px 1px $button-drop_shadow, 1px 1px 0 $button-inner_shadow inset;
+    background: $button-background;
+    transition: box-shadow .2s ease, transform .5s ease, margin-top .2s ease;
+    cursor: pointer;
+    border: 0;
+    color: $button-text;
+    font-family: inherit;
+
+    &:hover {
+        transform: scale(1.1, 1.1);
+        box-shadow: 0 0 10px $button-drop_shadow, 1px 1px 150px $button-inner_shadow inset;
+        color: $button_text-hover;
+    }
+
+    &:active {
+        //margin-top: 5px;
+        box-shadow: 0 1px 1px $button-drop_shadow, 1px 1px 0 $button-inner_shadow inset;
+        color: $button-text;
+    }
+}
+
+.buttonControl {
+    background: $button_control-background;
+    transition: box-shadow .2s ease, transform .5s ease, margin-top .2s ease;
+    cursor: pointer;
+    border: 0;
+    color: $button-text;
+
+    &:hover {
+        transform: scale(1.1, 1.1);
+        box-shadow: 0 0 10px $button_control-drop_shadow, 1px 1px 150px $button-inner_shadow inset;
+        color: $button_control-text-hover;
+    }
+
+    &:active {
+        //margin-top: 5px;
+        box-shadow: 0 1px 1px $button_control-drop_shadow, 1px 1px 0 $button-inner_shadow inset;
+        color: $button-text;
+    }
+}
+
+#buttonTab,
+#buttonBackslash {
+    width: 8rem;
+}
+
+#buttonBackspace,
+#buttonCapsLock,
+#buttonShiftLeft {
+    width: 11rem;
+}
+
+#buttonEnter,
+#buttonShiftRight {
+    width: 10.6rem;
+}
+
+#buttonSpace {
+    width: 39rem;
+}
+
+.button_hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 10px $button-drop_shadow, 1px 1px 150px $button-inner_shadow inset;
+    color: $button_text-hover;
+}
+
+.button_active {
+    //margin-top: 5px;
+    box-shadow: 0 1px 1px $button-drop_shadow, 1px 1px 0 $button-inner_shadow inset;
+    color: $button-text;
+}
+
+.buttonControl_hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 10px $button_control-drop_shadow, 1px 1px 150px $button-inner_shadow inset;
+    color: $button_control-text-hover;
+}
+/*
+#span{
+    display: inline-block;
+    position: absolute;
+    padding: 0;
+    font-size: 1.5rem;
+}*/
+
+
+.helper {
+    font-family: inherit;
+    font-size: inherit;
+
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    li {
+        //width: 100%;
+        display: inline-block;
+    }
+}
