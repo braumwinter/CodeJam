@@ -160,6 +160,7 @@ class Button {
         false);
         break;
       }
+
       case 'buttonEnter': {
         this.button.addEventListener('click', () => {
           const strLength = textArea.value.length;
@@ -168,7 +169,7 @@ class Button {
           if (carriage === strLength) {
             textArea.value += '\n';
           } else {
-            textArea.value = `${textArea.value.slice(0, carriage)} \n ${textArea.value.slice(carriage)}`;
+            textArea.value = `${textArea.value.slice(0, carriage)}\n${textArea.value.slice(carriage)}`;
           }
 
           textArea.focus();
@@ -178,6 +179,7 @@ class Button {
         false);
         break;
       }
+
       case 'buttonShiftLeft': {
         this.button.addEventListener('mousedown', () => {
           if (isCapsLock) {
@@ -219,7 +221,7 @@ class Button {
           const str = textArea.value;
           carriage = textArea.selectionEnd;
 
-          // проверяем были ли переносы строки (используем трюк с побитовым НЕ)
+          // проверяем были ли переносы строки
           const lineBreak = str.indexOf('\n');
 
           // проверяем сколько примерно строк, если без переносов
@@ -372,7 +374,7 @@ class Button {
           const str = textArea.value;
           carriage = textArea.selectionEnd;
 
-          // проверяем были ли переносы строки (используем трюк с побитовым НЕ)
+          // проверяем были ли переносы строки
           const lineBreak = str.indexOf('\n');
 
           // проверяем сколько примерно строк, если без переносов
@@ -390,8 +392,6 @@ class Button {
           if ((lineBreak !== -1) || numberLines) {
             // делим на строки и находим курсор
             for (let counterStr = 0; counterStr < str.length; counterStr += 1) {
-              // console.log(str[counterStr]);
-
               if (counterStr === carriage) {
                 carriageLines = counterLines + 1;
                 carriageSymbol = counterCarriage;
@@ -614,13 +614,9 @@ let buttonEqual = document.createElement('button');
 buttonEqual = new Button('=', '+', '=', '+', buttonEqual, 'buttonEqual', 'button', 1);
 KeyBoardLetters.push(buttonEqual);
 
-// - Backspace
-
 let buttonBackspace = document.createElement('button');
 buttonBackspace = new Button('Backspace', 'Backspace', 'Backspace', 'Backspace', buttonBackspace, 'buttonBackspace', 'button buttonControl', 1);
 KeyBoardLetters.push(buttonBackspace);
-
-// -- Tab
 
 let buttonTab = document.createElement('button');
 buttonTab = new Button('Tab', 'Tab', 'Tab', 'Tab', buttonTab, 'buttonTab', 'button buttonControl', 2);
@@ -678,8 +674,6 @@ let buttonBackslash = document.createElement('button');
 buttonBackslash = new Button('\\', '|', '\\', '/', buttonBackslash, 'buttonBackslash', 'button', 2);
 KeyBoardLetters.push(buttonBackslash);
 
-// --- CapsLock
-
 let buttonCapsLock = document.createElement('button');
 buttonCapsLock = new Button('CapsLock', 'CapsLock', 'CapsLock', 'CapsLock', buttonCapsLock, 'buttonCapsLock', 'button buttonControl', 3);
 KeyBoardLetters.push(buttonCapsLock);
@@ -728,13 +722,9 @@ let buttonQuote = document.createElement('button');
 buttonQuote = new Button('\'', '"', 'э', 'Э', buttonQuote, 'buttonQuote', 'button', 3);
 KeyBoardLetters.push(buttonQuote);
 
-// --- Enter
-
 let buttonEnter = document.createElement('button');
 buttonEnter = new Button('Enter', 'Enter', 'Enter', 'Enter', buttonEnter, 'buttonEnter', 'button buttonControl', 3);
 KeyBoardLetters.push(buttonEnter);
-
-// ---- ShiftLeft
 
 let buttonShiftLeft = document.createElement('button');
 buttonShiftLeft = new Button('Shift', 'Shift', 'Shift', 'Shift', buttonShiftLeft, 'buttonShiftLeft', 'button buttonControl', 4);
@@ -780,19 +770,13 @@ let buttonSlash = document.createElement('button');
 buttonSlash = new Button('/', '?', '.', ',', buttonSlash, 'buttonSlash', 'button', 4);
 KeyBoardLetters.push(buttonSlash);
 
-// ---- ArrowUp buttonControl
-
 let buttonArrowUp = document.createElement('button');
 buttonArrowUp = new Button('&uarr;', '&uarr;', '&uarr;', '&uarr;', buttonArrowUp, 'buttonArrowUp', 'button buttonControl', 4);
 KeyBoardLetters.push(buttonArrowUp);
 
-// ---- ShiftRight
-
 let buttonShiftRight = document.createElement('button');
 buttonShiftRight = new Button('Shift', 'Shift', 'Shift', 'Shift', buttonShiftRight, 'buttonShiftRight', 'button buttonControl', 4);
 KeyBoardLetters.push(buttonShiftRight);
-
-// ----- ctrl win alt Space AltRight ArrowLeft ArrowDown ArrowRight Ctrl
 
 let buttonCtrlLeft = document.createElement('button');
 buttonCtrlLeft = new Button('Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', buttonCtrlLeft, 'buttonCtrlLeft', 'button buttonControl', 5);
@@ -813,8 +797,6 @@ KeyBoardLetters.push(buttonSpace);
 let buttonAltRight = document.createElement('button');
 buttonAltRight = new Button('Alt', 'Alt', 'Alt', 'Alt', buttonAltRight, 'buttonAltRight', 'button buttonControl', 5);
 KeyBoardLetters.push(buttonAltRight);
-
-//
 
 let buttonArrowLeft = document.createElement('button');
 buttonArrowLeft = new Button('&larr;', '&larr;', '&larr;', '&larr;', buttonArrowLeft, 'buttonArrowLeft', 'button buttonControl', 5);
@@ -837,7 +819,6 @@ function KeyDownButton(buttonName) {
   for (let i = 0; i < KeyBoardLetters.length; i += 1) {
     if (KeyBoardLetters[i].getName() === buttonName) {
       KeyBoardLetters[i].onclick();
-      // KeyBoardLetters[i].print();
       break;
     }
   }
@@ -883,7 +864,7 @@ function PrintSimbol(buttonName) {
       if (carriage === strLength) {
         textArea.value += '\n';
       } else {
-        textArea.value = `${textArea.value.slice(0, carriage)} \n ${textArea.value.slice(carriage)}`;
+        textArea.value = `${textArea.value.slice(0, carriage)}\n${textArea.value.slice(carriage)}`;
       }
 
       textArea.focus();
@@ -907,7 +888,6 @@ function PrintSimbol(buttonName) {
       textArea.selectionEnd = carriage;
       break;
     }
-
 
     default: {
       for (let i = 0; i < KeyBoardLetters.length; i += 1) {
@@ -1010,325 +990,386 @@ document.addEventListener('keydown', (event) => {
     event.preventDefault();
   }
 
-
   switch (keyCode) {
     case 'Backquote': {
       KeyDownButton('buttonBackquote');
       PrintSimbol('buttonBackquote');
       break;
     }
+
     case 'Digit1': {
       KeyDownButton('button1');
       PrintSimbol('button1');
       break;
     }
+
     case 'Digit2': {
       KeyDownButton('button2');
       PrintSimbol('button2');
       break;
     }
+
     case 'Digit3': {
       KeyDownButton('button3');
       PrintSimbol('button3');
       break;
     }
+
     case 'Digit4': {
       KeyDownButton('button4');
       PrintSimbol('button4');
       break;
     }
+
     case 'Digit5': {
       KeyDownButton('button5');
       PrintSimbol('button5');
       break;
     }
+
     case 'Digit6': {
       KeyDownButton('button6');
       PrintSimbol('button6');
       break;
     }
+
     case 'Digit7': {
       KeyDownButton('button7');
       PrintSimbol('button7');
       break;
     }
+
     case 'Digit8': {
       KeyDownButton('button8');
       PrintSimbol('button8');
       break;
     }
+
     case 'Digit9': {
       KeyDownButton('button9');
       PrintSimbol('button9');
       break;
     }
+
     case 'Digit0': {
       KeyDownButton('button0');
       PrintSimbol('button0');
       break;
     }
+
     case 'Minus': {
       KeyDownButton('buttonMinus');
       PrintSimbol('buttonMinus');
       break;
     }
+
     case 'Equal': {
       KeyDownButton('buttonEqual');
       PrintSimbol('buttonEqual');
       break;
     }
+
     case 'Backspace': {
       KeyDownButton('buttonBackspace');
       PrintSimbol('buttonBackspace');
       break;
     }
+
     case 'Tab': {
       KeyDownButton('buttonTab');
       PrintSimbol('buttonTab');
       break;
     }
+
     case 'KeyQ': {
       KeyDownButton('buttonQ');
       PrintSimbol('buttonQ');
       break;
     }
+
     case 'KeyW': {
       KeyDownButton('buttonW');
       PrintSimbol('buttonW');
       break;
     }
+
     case 'KeyE': {
       KeyDownButton('buttonE');
       PrintSimbol('buttonE');
       break;
     }
+
     case 'KeyR': {
       KeyDownButton('buttonR');
       PrintSimbol('buttonR');
       break;
     }
+
     case 'KeyT': {
       KeyDownButton('buttonT');
       PrintSimbol('buttonT');
       break;
     }
+
     case 'KeyY': {
       KeyDownButton('buttonY');
       PrintSimbol('buttonY');
       break;
     }
+
     case 'KeyU': {
       KeyDownButton('buttonU');
       PrintSimbol('buttonU');
       break;
     }
+
     case 'KeyI': {
       KeyDownButton('buttonI');
       PrintSimbol('buttonI');
       break;
     }
+
     case 'KeyO': {
       KeyDownButton('buttonO');
       PrintSimbol('buttonO');
       break;
     }
+
     case 'KeyP': {
       KeyDownButton('buttonP');
       PrintSimbol('buttonP');
       break;
     }
+
     case 'BracketLeft': {
       KeyDownButton('buttonBracketLeft');
       PrintSimbol('buttonBracketLeft');
       break;
     }
+
     case 'BracketRight': {
       KeyDownButton('buttonBracketRight');
       PrintSimbol('buttonBracketRight');
       break;
     }
+
     case 'Backslash': {
       KeyDownButton('buttonBackslash');
       PrintSimbol('buttonBackslash');
       break;
     }
+
     case 'CapsLock': {
       KeyDownButton('buttonCapsLock');
       CapsLock();
       break;
     }
+
     case 'KeyA': {
       KeyDownButton('buttonA');
       PrintSimbol('buttonA');
       break;
     }
+
     case 'KeyS': {
       KeyDownButton('buttonS');
       PrintSimbol('buttonS');
       break;
     }
+
     case 'KeyD': {
       KeyDownButton('buttonD');
       PrintSimbol('buttonD');
       break;
     }
+
     case 'KeyF': {
       KeyDownButton('buttonF');
       PrintSimbol('buttonF');
       break;
     }
+
     case 'KeyG': {
       KeyDownButton('buttonG');
       PrintSimbol('buttonG');
       break;
     }
+
     case 'KeyH': {
       KeyDownButton('buttonH');
       PrintSimbol('buttonH');
       break;
     }
+
     case 'KeyJ': {
       KeyDownButton('buttonJ');
       PrintSimbol('buttonJ');
       break;
     }
+
     case 'KeyK': {
       KeyDownButton('buttonK');
       PrintSimbol('buttonK');
       break;
     }
+
     case 'KeyL': {
       KeyDownButton('buttonL');
       PrintSimbol('buttonL');
       break;
     }
+
     case 'Semicolon': {
       KeyDownButton('buttonSemicolon');
       PrintSimbol('buttonSemicolon');
       break;
     }
+
     case 'Quote': {
       KeyDownButton('buttonQuote');
       PrintSimbol('buttonQuote');
       break;
     }
+
     case 'Enter': {
       KeyDownButton('buttonEnter');
       PrintSimbol('buttonEnter');
       break;
     }
+
     case 'ShiftLeft': {
       KeyDownButton('buttonShiftLeft');
       ShiftDown();
       break;
     }
+
     case 'KeyZ': {
       KeyDownButton('buttonZ');
       PrintSimbol('buttonZ');
       break;
     }
+
     case 'KeyX': {
       KeyDownButton('buttonX');
       PrintSimbol('buttonX');
       break;
     }
+
     case 'KeyC': {
       KeyDownButton('buttonC');
       PrintSimbol('buttonC');
       break;
     }
+
     case 'KeyV': {
       KeyDownButton('buttonV');
       PrintSimbol('buttonV');
       break;
     }
+
     case 'KeyB': {
       KeyDownButton('buttonB');
       PrintSimbol('buttonB');
       break;
     }
+
     case 'KeyN': {
       KeyDownButton('buttonN');
       PrintSimbol('buttonN');
       break;
     }
+
     case 'KeyM': {
       KeyDownButton('buttonM');
       PrintSimbol('buttonM');
       break;
     }
+
     case 'Comma': {
       KeyDownButton('buttonComma');
       PrintSimbol('buttonComma');
       break;
     }
+
     case 'Period': {
       KeyDownButton('buttonPeriod');
       PrintSimbol('buttonPeriod');
       break;
     }
+
     case 'Slash': {
       KeyDownButton('buttonSlash');
       PrintSimbol('buttonSlash');
       break;
     }
+
     case 'ArrowUp': {
       KeyDownButton('buttonArrowUp');
       break;
     }
+
     case 'ShiftRight': {
       KeyDownButton('buttonShiftRight');
       ShiftDown();
       break;
     }
+
     case 'ControlLeft': {
       isCtrl = true;
       KeyDownButton('buttonCtrlLeft');
       ChangeLang();
       break;
     }
+
     case 'MetaLeft': {
       KeyDownButton('buttonMetaLeft');
-
       break;
     }
+
     case 'AltLeft': {
       isAlt = true;
       KeyDownButton('buttonAltLeft');
       ChangeLang();
       break;
     }
+
     case 'Space': {
       KeyDownButton('buttonSpace');
       PrintSimbol('buttonSpace');
       break;
     }
+
     case 'AltRight': {
       isAlt = true;
       KeyDownButton('buttonAltRight');
       ChangeLang();
       break;
     }
+
     case 'ArrowLeft': {
       KeyDownButton('buttonArrowLeft');
       ArrowLeft();
       break;
     }
+
     case 'ArrowDown': {
       KeyDownButton('buttonArrowDown');
       break;
     }
+
     case 'ArrowRight': {
       KeyDownButton('buttonArrowRight');
       ArrowRight();
       break;
     }
+
     case 'ControlRight': {
       isCtrl = true;
       KeyDownButton('buttonCtrlRigh');
       ChangeLang();
       break;
     }
+
     default:
       break;
   }
@@ -1342,102 +1383,127 @@ document.addEventListener('keyup', (event) => {
       KeyUpButton('buttonBackquote');
       break;
     }
+
     case 'Digit1': {
       KeyUpButton('button1');
       break;
     }
+
     case 'Digit2': {
       KeyUpButton('button2');
       break;
     }
+
     case 'Digit3': {
       KeyUpButton('button3');
       break;
     }
+
     case 'Digit4': {
       KeyUpButton('button4');
       break;
     }
+
     case 'Digit5': {
       KeyUpButton('button5');
       break;
     }
+
     case 'Digit6': {
       KeyUpButton('button6');
       break;
     }
+
     case 'Digit7': {
       KeyUpButton('button7');
       break;
     }
+
     case 'Digit8': {
       KeyUpButton('button8');
       break;
     }
+
     case 'Digit9': {
       KeyUpButton('button9');
       break;
     }
+
     case 'Digit0': {
       KeyUpButton('button0');
       break;
     }
+
     case 'Minus': {
       KeyUpButton('buttonMinus');
       break;
     }
+
     case 'Equal': {
       KeyUpButton('buttonEqual');
       break;
     }
+
     case 'Backspace': {
       KeyUpButton('buttonBackspace');
       break;
     }
+
     case 'Tab': {
       KeyUpButton('buttonTab');
       break;
     }
+
     case 'KeyQ': {
       KeyUpButton('buttonQ');
       break;
     }
+
     case 'KeyW': {
       KeyUpButton('buttonW');
       break;
     }
+
     case 'KeyE': {
       KeyUpButton('buttonE');
       break;
     }
+
     case 'KeyR': {
       KeyUpButton('buttonR');
       break;
     }
+
     case 'KeyT': {
       KeyUpButton('buttonT');
       break;
     }
+
     case 'KeyY': {
       KeyUpButton('buttonY');
       break;
     }
+
     case 'KeyU': {
       KeyUpButton('buttonU');
       break;
     }
+
     case 'KeyI': {
       KeyUpButton('buttonI');
       break;
     }
+
     case 'KeyO': {
       KeyUpButton('buttonO');
       break;
     }
+
     case 'KeyP': {
       KeyUpButton('buttonP');
       break;
     }
+
     case 'BracketLeft': {
       KeyUpButton('buttonBracketLeft');
       break;
@@ -1446,156 +1512,193 @@ document.addEventListener('keyup', (event) => {
       KeyUpButton('buttonBracketRight');
       break;
     }
+
     case 'Backslash': {
       KeyUpButton('buttonBackslash');
       break;
     }
+
     case 'CapsLock': {
       KeyUpButton('buttonCapsLock');
       break;
     }
+
     case 'KeyA': {
       KeyUpButton('buttonA');
       break;
     }
+
     case 'KeyS': {
       KeyUpButton('buttonS');
       break;
     }
+
     case 'KeyD': {
       KeyUpButton('buttonD');
       break;
     }
+
     case 'KeyF': {
       KeyUpButton('buttonF');
       break;
     }
+
     case 'KeyG': {
       KeyUpButton('buttonG');
       break;
     }
+
     case 'KeyH': {
       KeyUpButton('buttonH');
       break;
     }
+
     case 'KeyJ': {
       KeyUpButton('buttonJ');
       break;
     }
+
     case 'KeyK': {
       KeyUpButton('buttonK');
       break;
     }
+
     case 'KeyL': {
       KeyUpButton('buttonL');
       break;
     }
+
     case 'Semicolon': {
       KeyUpButton('buttonSemicolon');
       break;
     }
+
     case 'Quote': {
       KeyUpButton('buttonQuote');
       break;
     }
+
     case 'Enter': {
       KeyUpButton('buttonEnter');
       break;
     }
+
     case 'ShiftLeft': {
       KeyUpButton('buttonShiftLeft');
       ShiftUp();
       break;
     }
+
     case 'KeyZ': {
       KeyUpButton('buttonZ');
       break;
     }
+
     case 'KeyX': {
       KeyUpButton('buttonX');
       break;
     }
+
     case 'KeyC': {
       KeyUpButton('buttonC');
       break;
     }
+
     case 'KeyV': {
       KeyUpButton('buttonV');
       break;
     }
+
     case 'KeyB': {
       KeyUpButton('buttonB');
       break;
     }
+
     case 'KeyN': {
       KeyUpButton('buttonN');
       break;
     }
+
     case 'KeyM': {
       KeyUpButton('buttonM');
       break;
     }
+
     case 'Comma': {
       KeyUpButton('buttonComma');
       break;
     }
+
     case 'Period': {
       KeyUpButton('buttonPeriod');
       break;
     }
+
     case 'Slash': {
       KeyUpButton('buttonSlash');
       break;
     }
+
     case 'ArrowUp': {
       KeyUpButton('buttonArrowUp');
       break;
     }
+
     case 'ShiftRight': {
       KeyUpButton('buttonShiftRight');
       ShiftUp();
       break;
     }
+
     case 'ControlLeft': {
       isCtrl = false;
       KeyUpButton('buttonCtrlLeft');
       break;
     }
+
     case 'MetaLeft': {
       KeyUpButton('buttonMetaLeft');
       break;
     }
+
     case 'AltLeft': {
       isAlt = false;
       KeyUpButton('buttonAltLeft');
       break;
     }
+
     case 'Space': {
       KeyUpButton('buttonSpace');
       break;
     }
+
     case 'AltRight': {
       isAlt = false;
       KeyUpButton('buttonAltRight');
       break;
     }
+
     case 'ArrowLeft': {
       KeyUpButton('buttonArrowLeft');
       break;
     }
+
     case 'ArrowDown': {
       KeyUpButton('buttonArrowDown');
       break;
     }
+
     case 'ArrowRight': {
       KeyUpButton('buttonArrowRight');
       break;
     }
+
     case 'ControlRight': {
       isCtrl = false;
       KeyUpButton('buttonCtrlRigh');
       break;
     }
+
     default:
       break;
   }
