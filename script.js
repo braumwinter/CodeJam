@@ -1,3 +1,16 @@
+const EN = 'en';
+const RU = 'ru';
+const LOWER = 'lower';
+const UPPER = 'upper';
+const KeyBoardLetters = [];
+
+let isCtrl = false;
+let isAlt = false;
+let isCapsLock = false;
+let letterCase = LOWER;
+let carriage = 0;
+let lang;
+
 const container = document.createElement('div');
 container.className = 'container';
 document.getElementsByTagName('body')[0].append(container);
@@ -820,6 +833,161 @@ buttonCtrlRigh = new Button('Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', buttonCtrlRigh, 'but
 KeyBoardLetters.push(buttonCtrlRigh);
 
 
+function KeyDownButton(buttonName) {
+    for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+      if (KeyBoardLetters[i].getName() === buttonName) {
+        KeyBoardLetters[i].onclick();
+        // KeyBoardLetters[i].print();
+        break;
+      }
+    }
+  }
+  
+  function KeyUpButton(buttonName) {
+    for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+      if (KeyBoardLetters[i].getName() === buttonName) {
+        KeyBoardLetters[i].onkeyup();
+        break;
+      }
+    }
+  }
+  
+  function PrintSimbol(buttonName) {
+    switch (buttonName) {
+      case 'buttonBackspace': {
+        const strLength = textArea.value.length;
+        carriage = textArea.selectionEnd;
+        if (carriage !== 0) {
+          if (carriage === strLength) {
+            textArea.value = textArea.value.slice(0, -1);
+          } else {
+            textArea.value = textArea.value.slice(0, carriage - 1) + textArea.value.slice(carriage);
+          }
+        }
+  
+        textArea.focus();
+  
+        if (carriage < 1) {
+          carriage = 0;
+        } else {
+          carriage -= 1;
+        }
+  
+        textArea.selectionEnd = carriage;
+        break;
+      }
+      case 'buttonEnter': {
+        const strLength = textArea.value.length;
+        carriage = textArea.selectionEnd;
+  
+        if (carriage === strLength) {
+          textArea.value += '\n';
+        } else {
+          textArea.value = `${textArea.value.slice(0, carriage)} \n ${textArea.value.slice(carriage)}`;
+        }
+  
+        textArea.focus();
+        carriage += 1;
+        textArea.selectionEnd = carriage;
+        break;
+      }
+  
+      case 'buttonTab': {
+        const strLength = textArea.value.length;
+        carriage = textArea.selectionEnd;
+  
+        if (carriage === strLength) {
+          textArea.value += '\t';
+        } else {
+          textArea.value = `${textArea.value.slice(0, carriage)}\t${textArea.value.slice(carriage)}`;
+        }
+  
+        textArea.focus();
+        carriage += 1;
+        textArea.selectionEnd = carriage;
+        break;
+      }
+  
+  
+      default: {
+        for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+          if (KeyBoardLetters[i].getName() === buttonName) {
+            KeyBoardLetters[i].printSymbol();
+            break;
+          }
+        }
+        break;
+      }
+    }
+  }
+  
+  function ArrowLeft() {
+    carriage = textArea.selectionEnd;
+    textArea.focus();
+    carriage -= 1;
+    textArea.selectionEnd = carriage;
+  }
+  
+  function ArrowRight() {
+    textArea.focus();
+    carriage += 1;
+    textArea.selectionStart = carriage;
+    textArea.selectionEnd = carriage;
+  }
+  
+  function CapsLock() {
+    isCapsLock = !isCapsLock;
+  
+    if (isCapsLock) {
+      letterCase = UPPER;
+    } else {
+      letterCase = LOWER;
+    }
+  
+    for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+      KeyBoardLetters[i].changeName();
+    }
+  }
+  
+  function ShiftDown() {
+    if (isCapsLock) {
+      letterCase = LOWER;
+    } else {
+      letterCase = UPPER;
+    }
+  
+    for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+      KeyBoardLetters[i].changeName();
+    }
+  }
+  
+  function ShiftUp() {
+    if (isCapsLock) {
+      letterCase = UPPER;
+    } else {
+      letterCase = LOWER;
+    }
+  
+    for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+      KeyBoardLetters[i].changeName();
+    }
+  }
+  
+  function ChangeLang() {
+    if (isCtrl && isAlt) {
+      if (localStorage.getItem('lang') === EN) {
+        localStorage.setItem('lang', RU);
+        lang = RU;
+      } else if (localStorage.getItem('lang') === RU) {
+        localStorage.setItem('lang', EN);
+        lang = EN;
+      }
+  
+      for (let i = 0; i < KeyBoardLetters.length; i += 1) {
+        KeyBoardLetters[i].changeName();
+      }
+    }
+  }
 
 
 document.addEventListener('keydown', (event) => {
