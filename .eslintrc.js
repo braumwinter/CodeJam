@@ -14,6 +14,8 @@ module.exports = {
   },
   rules: {
     "linebreak-style": 0,
-    "operator-linebreak": 0
+    "operator-linebreak": 0,
+    "no-unused-vars": ["off", { "vars": "local", "args": "none", "ignoreRestSiblings": false }],
+    "no-undef": 'off'
   },
 };
